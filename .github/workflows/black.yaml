@@ -1,0 +1,30 @@
+name: Python Black Linter
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  run-linters:
+    name: Run linters
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+        with:
+          path: src/github.com/${{ github.repository }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+          architecture: "x64"
+
+      - name: Install Python dependencies
+        run: |
+          pip3 install git+git://github.com/psf/black
+
+      - name: Lint python files
+        if: success() || failure()
+        run: black --check .
