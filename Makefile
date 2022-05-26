@@ -8,6 +8,6 @@ venv_setup:
 	python3 -m venv $(venv_dir)
 
 run:
-	$(venv_activate); gunicorn personal_website.wsgi
+	$(venv_activate); python manage.py runserver
 
 all: venv_setup install run
