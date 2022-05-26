@@ -23,6 +23,7 @@ jobs:
       - name: Install Python dependencies
         run: |
           pip3 install pyright
+          pip3 install -r requirements.txt
 
       - name: Type Check Python Files
         if: success() || failure()
