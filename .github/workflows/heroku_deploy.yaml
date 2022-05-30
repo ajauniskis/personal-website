@@ -15,9 +15,17 @@ jobs:
           python-version: "3.x"
           architecture: "x64"
 
+      - name: Install Python dependencies
+        run: |
+          pip3 install -r requirements.txt
+
       - name: Disable Debugging
         run: |
           python .github/workflows/deploy_utils.py disable_debugging
+
+      - name: Make migrations
+        run: |
+          python manage.py makemigrations
 
       - name: Deploy
         uses: akhileshns/heroku-deploy@v3.12.12
