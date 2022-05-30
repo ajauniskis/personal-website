@@ -28,6 +28,10 @@ jobs:
           python manage.py makemigrations
           python manage.py collectstatic --noinput
 
+      - name: Run tests
+        run: |
+          python manage.py test
+
       - name: Deploy
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
