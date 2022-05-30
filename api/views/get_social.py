@@ -25,6 +25,6 @@ class GetSocial(APIView):
             )
 
         return Response(
-            {"Bad Request": "Code paramater not found in request"},
+            {"Bad Request": "social_name parameter not found in request"},
             status=status.HTTP_400_BAD_REQUEST,
         )
