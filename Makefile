@@ -10,4 +10,8 @@ venv_setup:
 run:
 	$(venv_activate); python manage.py runserver
 
+migrate:
+	$(venv_activate); python manage.py makemigrations
+	$(venv_activate); python manage.py migrate
+
 all: venv_setup install run
