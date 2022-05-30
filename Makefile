@@ -14,4 +14,7 @@ migrate:
 	$(venv_activate); python manage.py makemigrations
 	$(venv_activate); python manage.py migrate
 
+test:
+	$(venv_activate); python manage.py test
+
 all: venv_setup install run
