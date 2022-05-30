@@ -12,7 +12,7 @@ class Social(Model):
         blank=False,
         choices=social_choices,
     )
-    username = CharField(max_length=100, null=False)
+    username = CharField(max_length=100, null=False, blank=False)
     created_at = DateTimeField(auto_now_add=True, null=False, blank=False)
 
     def __str__(self):
