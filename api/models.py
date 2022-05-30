@@ -9,6 +9,7 @@ class Social(Model):
         ("twitter", "twitter"),
         ("discord", "discord"),
         ("linkedin", "linkedin"),
+        ("reddit", "reddit"),
     )
 
     social_name = CharField(
@@ -28,6 +29,7 @@ class Social(Model):
             "twitter": "twitter.com/",
             "discord": "https://discordapp.com/users/",
             "linkedin": "linkedin.com/in/",
+            "reddit": "reddit.com/user/",
         }
         url = social_map[self.social_name] + self.username
         return url
