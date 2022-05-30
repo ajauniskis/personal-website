@@ -26,6 +26,7 @@ jobs:
       - name: Make migrations
         run: |
           python manage.py makemigrations
+          python manage.py collectstatic
 
       - name: Deploy
         uses: akhileshns/heroku-deploy@v3.12.12
