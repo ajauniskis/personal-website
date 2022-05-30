@@ -4,11 +4,11 @@ from django.contrib import admin
 # Create your models here.
 class Social(Model):
     social_choices = (
-        ("facebook.com", "facebook"),
-        ("github.com", "github"),
-        ("twitter.com", "twitter"),
-        ("discord.com", "discord"),
-        ("linkedin.com", "linkedin"),
+        ("facebook", "facebook"),
+        ("github", "github"),
+        ("twitter", "twitter"),
+        ("discord", "discord"),
+        ("linkedin", "linkedin"),
     )
 
     social_name = CharField(
@@ -22,7 +22,15 @@ class Social(Model):
     created_at = DateTimeField(auto_now_add=True, null=False, blank=False)
 
     def __str__(self):
-        return self.social_name + "/" + self.username
+        social_map = {
+            "facebook": "facebook.com/",
+            "github": "github.com/",
+            "twitter": "twitter.com/",
+            "discord": "https://discordapp.com/users/",
+            "linkedin": "linkedin.com/in/",
+        }
+        url = social_map[self.social_name] + self.username
+        return url
 
     def social_url(self):
-        return self.social_name + "/" + self.username
+        return str(self)
