@@ -3,7 +3,13 @@ from django.contrib import admin
 
 # Create your models here.
 class Social(Model):
-    social_choices = (("facebook.com", "facebook"),)
+    social_choices = (
+        ("facebook.com", "facebook"),
+        ("github.com", "github"),
+        ("twitter.com", "twitter"),
+        ("discord.com", "discord"),
+        ("linkedin.com", "linkedin"),
+    )
 
     social_name = CharField(
         max_length=100,
