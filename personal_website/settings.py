@@ -29,6 +29,7 @@ SECRET_KEY = get_random_secret_key()
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
+INTERNAL_IPS = ["127.0.0.1"]
 
 
 # Application definition
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     "personalpage.apps.PersonalpageConfig",
     "api.apps.ApiConfig",
     "rest_framework",
+    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
@@ -55,6 +57,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = "personal_website.urls"
