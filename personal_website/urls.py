@@ -19,6 +19,7 @@ from django.views.generic.base import RedirectView
 from django.contrib.staticfiles.storage import staticfiles_storage
 
 urlpatterns = [
+    path("__debug__/", include("debug_toolbar.urls")),
     path("admin/", admin.site.urls),
     path("", include("personalpage.urls")),
     path("api/", include("api.urls")),
