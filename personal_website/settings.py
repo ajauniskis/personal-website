@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "api.apps.ApiConfig",
     "rest_framework",
     "debug_toolbar",
+    "fontawesomefree",
 ]
 
 MIDDLEWARE = [
