@@ -1,7 +1,7 @@
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView as tw
 
 
-class TemplateView(TemplateView):
+class TemplateView(tw):
     title = ""
 
     def get_title(self):
