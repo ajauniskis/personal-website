@@ -1,0 +1,18 @@
+<!-- modal.html -->
+
+<!-- Modal -->
+
+
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title" id="contactsModalLabel">{{ title }}</h4>
+    </div>
+    <div class="modal-body">
+        {% for social in socials %}
+            <ul>{{ social.social_url }}</ul>
+        {% endfor %}
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+    </div>
+</div>
