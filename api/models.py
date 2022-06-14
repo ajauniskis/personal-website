@@ -12,6 +12,15 @@ class Social(Model):
         ("reddit", "reddit"),
     )
 
+    social_map = {
+        "facebook": "facebook.com/",
+        "github": "github.com/",
+        "twitter": "twitter.com/",
+        "discord": "https://discordapp.com/users/",
+        "linkedin": "linkedin.com/in/",
+        "reddit": "reddit.com/user/",
+    }
+
     social_name = CharField(
         max_length=100,
         unique=True,
@@ -22,17 +31,9 @@ class Social(Model):
     username = CharField(max_length=100, null=False, blank=False)
     created_at = DateTimeField(auto_now_add=True, null=False, blank=False)
 
-    def __str__(self):
-        social_map = {
-            "facebook": "facebook.com/",
-            "github": "github.com/",
-            "twitter": "twitter.com/",
-            "discord": "https://discordapp.com/users/",
-            "linkedin": "linkedin.com/in/",
-            "reddit": "reddit.com/user/",
-        }
-        url = social_map[self.social_name] + self.username
+    def __str__(self) -> str:
+        url = self.social_map[self.social_name] + self.username
         return url
 
-    def social_url(self):
+    def social_url(self) -> str:
         return str(self)
