@@ -8,7 +8,11 @@
         <p>Sorry, no contacts for now &#128546;</p>
         {% else %}
             {% for social in socials %}
-                <ul>{{ social.social_url }}</ul>
+                <ul>
+                    <h5>
+                        <i class="{{ social.social_fa }}"></i> <a href={{ social.social_url }}>{{ social.social_name }}</a>
+                    </h5>
+                </ul>
             {% endfor %}
         {% endif %}
     </div>
