@@ -1,0 +1,91 @@
+name: Main Workflow
+on: 
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+
+  run-black:
+    name: Run Black
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9.7"
+          architecture: "x64"
+          cache: "pip"
+
+      - name: Install Python dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install black
+      - name: Lint python files
+        if: success() || failure()
+        run: black --check .
+
+  run-pyright:
+    name: Run Pyright
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9.7"
+          architecture: "x64"
+          cache: "pip"
+
+      - name: Install Python dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install pyright
+
+      - name: Type Check Python Files
+        if: success() || failure()
+        run: pyright .
+
+  django-tests:
+    name: Django Tests
+    runs-on: ubuntu-latest
+    needs:
+      - run-black
+      - run-pyright
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.9.7"
+          architecture: "x64"
+          cache: "pip"
+
+      - name: Install Python dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Make migrations
+        run: |
+          python manage.py makemigrations
+          python manage.py collectstatic --noinput
+
+      - name: Run tests
+        run: |
+          python manage.py test
+
+  heroku_deploy:
+    name: Heroku Deploy
+    needs: django-tests
+    if: success() && github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/heroku_deploy.yaml
