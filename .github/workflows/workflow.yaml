@@ -35,8 +35,6 @@ jobs:
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v2
-        with:
-          path: src/github.com/${{ github.repository }}
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -47,8 +45,8 @@ jobs:
 
       - name: Install Python dependencies
         run: |
-          pip3 install -r requirements.txt
-          pip3 install black
+          pip install -r requirements.txt
+          pip install black
       - name: Lint python files
         if: success() || failure()
         run: black --check .
