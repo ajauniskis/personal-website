@@ -89,3 +89,4 @@ jobs:
     needs: django-tests
     if: success() && github.ref == 'refs/heads/main'
     uses: ./.github/workflows/heroku_deploy.yaml
+    secrets: inherit
