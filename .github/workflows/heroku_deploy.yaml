@@ -13,6 +13,7 @@ jobs:
         with:
           python-version: "3.9.7"
           architecture: "x64"
+          cache: "pip"
 
       - name: Install Python dependencies
         run: |
