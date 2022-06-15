@@ -85,6 +85,7 @@ jobs:
           python manage.py test
 
   heroku_deploy:
+    name: Heroku Deploy
     needs: django-tests
     if: success() && github.ref == 'refs/heads/main'
     uses: ./.github/workflows/heroku_deploy.yaml
