@@ -22,7 +22,7 @@ jobs:
 
       - name: Disable Debugging
         run: |
-          python .github/workflows/deploy_utils.py disable_debugging
+          python .github/workflows/utils/deploy_utils.py disable_debugging
 
       - name: Make migrations
         run: |
