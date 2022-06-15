@@ -59,8 +59,6 @@ jobs:
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v2
-        with:
-          path: src/github.com/${{ github.repository }}
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -73,6 +71,7 @@ jobs:
         run: |
           pip install -r requirements.txt
           pip install pyright
+
       - name: Type Check Python Files
         if: success() || failure()
         run: pyright .
