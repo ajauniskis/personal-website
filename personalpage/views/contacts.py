@@ -13,7 +13,7 @@ class ContactsView(TemplateView):
     def get(self, request: HttpRequest) -> HttpResponse:
         # updateparams.delay()
         context = {
-            "title": "Contacts",
+            "title": "Contact Me",
             "socials": self.socials,
         }
         return render(request, self.template_name, context)

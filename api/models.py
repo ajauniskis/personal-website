@@ -10,15 +10,38 @@ class Social(Model):
         ("discord", "discord"),
         ("linkedin", "linkedin"),
         ("reddit", "reddit"),
+        ("email", "email"),
     )
 
     social_map = {
-        "facebook": "facebook.com/",
-        "github": "github.com/",
-        "twitter": "twitter.com/",
-        "discord": "https://discordapp.com/users/",
-        "linkedin": "linkedin.com/in/",
-        "reddit": "reddit.com/user/",
+        "facebook": {
+            "url": "https://facebook.com/",
+            "fa": "fa-brands fa-facebook",
+        },
+        "github": {
+            "url": "https://github.com/",
+            "fa": "fa-brands fa-github",
+        },
+        "twitter": {
+            "url": "https://twitter.com/",
+            "fa": "fa-brands fa-twitter",
+        },
+        "discord": {
+            "url": "https://discordapp.com/users/",
+            "fa": "fa-brands fa-discord",
+        },
+        "linkedin": {
+            "url": "https://linkedin.com/in/",
+            "fa": "fa-brands fa-linkedin-in",
+        },
+        "reddit": {
+            "url": "https://reddit.com/user/",
+            "fa": "fa-brands fa-reddit",
+        },
+        "email": {
+            "url": "mailto:",
+            "fa": "fa-solid fa-envelope",
+        },
     }
 
     social_name = CharField(
@@ -32,8 +55,11 @@ class Social(Model):
     created_at = DateTimeField(auto_now_add=True, null=False, blank=False)
 
     def __str__(self) -> str:
-        url = self.social_map[self.social_name] + self.username
+        url = self.social_map[self.social_name]["url"] + self.username
         return url
 
     def social_url(self) -> str:
         return str(self)
+
+    def social_fa(self):
+        return self.social_map[self.social_name]["fa"]
