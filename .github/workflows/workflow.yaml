@@ -5,28 +5,6 @@ on:
   pull_request:
     branches: [ main ]
 jobs:
-  # install-dependencies:
-  #   name: Install Python Dependencies
-  #   runs-on: ubuntu-latest
-
-  #   steps:
-  #     - name: Check out Git repository
-  #       uses: actions/checkout@v2
-  #       with:
-  #         path: src/github.com/${{ github.repository }}
-
-  #     - name: Set up Python
-  #       uses: actions/setup-python@v4
-  #       with:
-  #         python-version: "3.x"
-  #         architecture: "x64"
-  #         cache: "pip"
-
-  #     - name: Install Python dependencies
-  #       run: |
-  #         pip install -r requirements.txt
-  #         pip install black
-  #         pip install pyright
 
   run-black:
     name: Run Black
