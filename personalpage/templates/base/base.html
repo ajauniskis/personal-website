@@ -11,12 +11,12 @@
     <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
 </head>
 <body>
-    {% include "navbar.html" %}
+    {% include "base/navbar.html" %}
     <div class="container">Base placeholder</div>
     <div class="container">
         {% block body_block %}
 
         {% endblock %}
     </div>
-    {% include "footer.html" %}
+    {% include "base/footer.html" %}
 </body>
