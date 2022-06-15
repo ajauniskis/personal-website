@@ -8,7 +8,7 @@ class SocialModelTest(TestCase):
 
     def test_social_url(self) -> None:
         facebook = Social.objects.get(social_name="facebook")
-        expected = "facebook.com/" + facebook.username
+        expected = "https://facebook.com/" + facebook.username
         actual = facebook.social_url()
 
         self.assertEqual(expected, actual)
