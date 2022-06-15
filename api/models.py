@@ -10,6 +10,7 @@ class Social(Model):
         ("discord", "discord"),
         ("linkedin", "linkedin"),
         ("reddit", "reddit"),
+        ("email", "email"),
     )
 
     social_map = {
