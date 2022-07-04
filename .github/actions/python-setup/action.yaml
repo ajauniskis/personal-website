@@ -9,10 +9,6 @@ runs:
       with:
         python-version: "3.9.7"
         architecture: "x64"
-        cache: "poetry"
-        cache-dependency-path: |
-          poetry.lock
-          pyproject.toml
 
     - name: Install Python dependencies
       shell: bash
