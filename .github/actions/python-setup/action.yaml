@@ -25,8 +25,8 @@ runs:
     - name: Poetry config
       shell: bash
       run: |
-        poetry config settings.virtualenvs.in-project true
-        poetry config settings.virtualenvs.path ./.venv
+        poetry config virtualenvs.in-project true
+        poetry config virtualenvs.path ./.venv
 
     - name: Install Python dependencies
       shell: bash
