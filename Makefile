@@ -2,7 +2,7 @@ venv_dir = .venv
 venv_activate = . $(venv_dir)/bin/activate
 
 install: venv_setup
-	$(venv_activate); pip install -r requirements.txt
+	poetry install
 
 venv_setup:
 	python3 -m venv $(venv_dir)

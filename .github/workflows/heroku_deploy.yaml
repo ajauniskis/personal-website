@@ -5,33 +5,25 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - name: Check out Git repository
+        uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: "3.9.7"
-          architecture: "x64"
-          cache: "pip"
-
-      - name: Install Python dependencies
-        run: |
-          pip3 install -r requirements.txt
+        uses: ./.github/actions/python-setup
 
       - name: Disable Debugging
         run: |
-          python .github/workflows/utils/deploy_utils.py disable_debugging
+          poetry run python .github/workflows/utils/deploy_utils.py disable_debugging
 
       - name: Make migrations
         run: |
-          python manage.py makemigrations
-          python manage.py collectstatic --noinput
+          poetry run python manage.py makemigrations
+          poetry run python manage.py collectstatic --noinput
 
-      - name: Run tests
-        run: |
-          python manage.py test
+      - name: Export Dependencies
+        run: poetry export -o requirements.txt --without-hashes
 
       - name: Deploy
         uses: akhileshns/heroku-deploy@v3.12.12

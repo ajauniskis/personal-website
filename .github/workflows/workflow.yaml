@@ -12,22 +12,14 @@ jobs:
 
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.9.7"
-          architecture: "x64"
-          cache: "pip"
+        uses: ./.github/actions/python-setup
 
-      - name: Install Python dependencies
-        run: |
-          pip install -r requirements.txt
-          pip install black
       - name: Lint python files
         if: success() || failure()
-        run: black --check .
+        run: poetry run black --check .
 
   run-pyright:
     name: Run Pyright
@@ -35,23 +27,14 @@ jobs:
 
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.9.7"
-          architecture: "x64"
-          cache: "pip"
-
-      - name: Install Python dependencies
-        run: |
-          pip install -r requirements.txt
-          pip install pyright
+        uses: ./.github/actions/python-setup
 
       - name: Type Check Python Files
         if: success() || failure()
-        run: pyright .
+        run: poetry run pyright .
 
   django-tests:
     name: Django Tests
@@ -62,27 +45,19 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: "3.9.7"
-          architecture: "x64"
-          cache: "pip"
-
-      - name: Install Python dependencies
-        run: |
-          pip install -r requirements.txt
+        uses: ./.github/actions/python-setup
 
       - name: Make migrations
         run: |
-          python manage.py makemigrations
-          python manage.py collectstatic --noinput
+          poetry run python manage.py makemigrations
+          poetry run python manage.py collectstatic --noinput
 
       - name: Run tests
         run: |
-          python manage.py test
+          poetry run python manage.py test
 
   heroku_deploy:
     name: Heroku Deploy
