@@ -12,7 +12,7 @@ runs:
 
     - name: Install Poetry
       shell: bash
-      run: pipx install poetry
+      run: pip install poetry
 
     - name: Poetry Cache
       uses: actions/cache@v3
