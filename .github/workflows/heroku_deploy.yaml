@@ -5,35 +5,41 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: Check out Git repository
         uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: "3.9.7"
           architecture: "x64"
-          cache: "pip"
+          cache: "poetry"
+          cache-dependency-path: |
+            poetry.lock
+            pyproject.toml
 
       - name: Install Python dependencies
         run: |
-          pip3 install poetry
-          poetry export -o requirements.txt --without-hashes
-          pip3 install -r requirements.txt
+          pip install poetry
+          poetry install
 
       - name: Disable Debugging
         run: |
-          python .github/workflows/utils/deploy_utils.py disable_debugging
+          poetry run python .github/workflows/utils/deploy_utils.py disable_debugging
 
       - name: Make migrations
         run: |
-          python manage.py makemigrations
-          python manage.py collectstatic --noinput
+          poetry run python manage.py makemigrations
+          poetry run python manage.py collectstatic --noinput
 
       - name: Run tests
         run: |
-          python manage.py test
+          poetry run python manage.py test
+
+      - name: Export Dependencies
+        run: poetry export -o requirements.txt --without-hashes
 
       - name: Deploy
         uses: akhileshns/heroku-deploy@v3.12.12
