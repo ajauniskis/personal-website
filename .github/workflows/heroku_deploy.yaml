@@ -34,10 +34,6 @@ jobs:
           poetry run python manage.py makemigrations
           poetry run python manage.py collectstatic --noinput
 
-      - name: Run tests
-        run: |
-          poetry run python manage.py test
-
       - name: Export Dependencies
         run: poetry export -o requirements.txt --without-hashes
 
