@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "personal-website"
 version = "0.1.0"
-description = ""
+description = "First take on Django with personal page website"
 authors = ["Algirdas Jauniskis <jauniskis.a@gmail.com>"]
 
 [tool.poetry.dependencies]
